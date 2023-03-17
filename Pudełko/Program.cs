@@ -17,6 +17,8 @@ namespace Pudełko
             Console.WriteLine(p1.ToString("m"));
             Console.WriteLine(p1.ToString("cm"));
             Console.WriteLine(p1.ToString("mm"));
+            Console.WriteLine(p1.Objetosc);
+            Console.WriteLine(p1.Pole);
 
             Console.ReadKey();
         }

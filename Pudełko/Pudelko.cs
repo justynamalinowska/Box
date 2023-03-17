@@ -9,7 +9,6 @@ namespace Pudełko
         public double c { get; set; }
         public UnitOfMeasure UnitOfMeasure { get; set; }
 
-
         public Pudelko(double a)
 		{
             this.a = a;
@@ -57,13 +56,9 @@ namespace Pudełko
 
         }
 
-
-
-
         public double A => Math.Round(a, 3);
         public double B => Math.Round(b, 3);
         public double C => Math.Round(c, 3);
-
 
         public override string ToString()
         {
@@ -93,6 +88,9 @@ namespace Pudełko
 
             }
         }
+
+        public double Objetosc => Math.Round(a * b * c, 9);
+        public double Pole => Math.Round((2 * a * b) + (2 * b * c) + (2 * c * a), 6);
     }	
 }
 
