@@ -9,25 +9,8 @@ namespace Pudełko
         public double c { get; set; }
         public UnitOfMeasure UnitOfMeasure { get; set; }
 
-        public Pudelko(double a)
-		{
-            this.a = a;
-            b = 0.01;
-            c = 0.01;
-            UnitOfMeasure = UnitOfMeasure.meter;
-        }
-
-        public Pudelko(double a, double b, double c)
+        public Pudelko(double a = 0.01, double b = 0.01, double c = 0.01, UnitOfMeasure unitOfMeasure=UnitOfMeasure.meter)
         {
-            this.a = a;
-            this.b = b;
-            this.c = c;
-            UnitOfMeasure = UnitOfMeasure.meter;
-        }
-
-        public Pudelko(double a, double b, double c, UnitOfMeasure unitOfMeasure)
-        {
-
             UnitOfMeasure = unitOfMeasure;
 
             if (unitOfMeasure==UnitOfMeasure.meter)
@@ -65,7 +48,7 @@ namespace Pudełko
             return $"{A.ToString("F3")} m × {B.ToString("F3")} m × {C.ToString("F3")} m";
         }
 
-        public string ToString(string format)//, IFormatProvider formatProvider)
+        public string ToString(string format)
         {
             if (string.IsNullOrEmpty(format))
             {
