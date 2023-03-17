@@ -1,38 +1,98 @@
 ﻿using System;
 namespace Pudełko
 {
-    public class Pudelko
+    public class Pudelko : IFormattable
     {
 
-        public double A { get => A; set => A = (value > 0 && value < 10 && UnitOfMeasure
-                != UnitOfMeasure.meter) ? A = Math.Round(value, 3) : throw new ArgumentOutOfRangeException();}
-        public double B { get => B; set => B = (value > 0 && value < 10 && UnitOfMeasure
-                != UnitOfMeasure.meter) ? B = Math.Round(value, 3) : throw new ArgumentOutOfRangeException();}
-        public double C { get => C; set => C = (value > 0 && value < 10 && UnitOfMeasure
-                != UnitOfMeasure.meter) ? C = Math.Round(value, 3) : throw new ArgumentOutOfRangeException();}
+        public double a { get; set; }
+        public double b { get; set; }
+        public double c { get; set; }
         public UnitOfMeasure UnitOfMeasure { get; set; }
 
 
-        public Pudelko()
+        public Pudelko(double a)
 		{
-            A = 10;
-            B = 10;
-            C = 10;
+            this.a = a;
+            b = 0.01;
+            c = 0.01;
+            UnitOfMeasure = UnitOfMeasure.meter;
+        }
+
+        public Pudelko(double a, double b, double c)
+        {
+            this.a = a;
+            this.b = b;
+            this.c = c;
             UnitOfMeasure = UnitOfMeasure.meter;
         }
 
         public Pudelko(double a, double b, double c, UnitOfMeasure unitOfMeasure)
         {
-            A = a;
-            B = b;
-            C = c;
+
             UnitOfMeasure = unitOfMeasure;
+
+            if (unitOfMeasure==UnitOfMeasure.meter)
+            {
+                this.a = a;
+                this.b = b;
+                this.c = c;
+            }
+            else if (unitOfMeasure == UnitOfMeasure.centimeter)
+            {
+                this.a /= 100;
+                this.b /= 100;
+                this.c /= 100;
+            }
+            else
+            {
+                this.a /= 1000;
+                this.b /= 1000;
+                this.c /= 1000;
+            }
+
+            if (this.a <= 0 || this.b <= 0 || this.c <= 0 || this.a > 10 || this.b > 10 || this.c > 10)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
         }
 
 
 
 
-		}
-	}	
+        public double A => Math.Round(a, 3);
+        public double B => Math.Round(b, 3);
+        public double C => Math.Round(c, 3);
+
+
+        public override string ToString()
+        {
+            return $"{A.ToString("F3")} m × {B.ToString("F3")} m × {C.ToString("F3")} m";
+        }
+
+        public string ToString(string format)//, IFormatProvider formatProvider)
+        {
+            if (string.IsNullOrEmpty(format))
+            {
+                format = "m";
+            }
+
+            switch (format.ToLower())
+            {
+                case "m":
+                    return ToString();
+
+                case ("cm"):
+                    return $"{A * 100:F1} {format} × {B * 100:F1} {format} × {C * 100:F1} {format}";
+
+                case ("mm"):
+                    return $"{A * 1000:F0} {format} × {B * 1000:F0} {format} × {C * 1000:F0} {format}";
+
+                default:
+                    throw new FormatException();
+
+            }
+        }
+    }	
 }
 
