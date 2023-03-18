@@ -95,6 +95,17 @@ namespace Pudełko
 
         public override int GetHashCode() => (A, B, C).GetHashCode();
 
+        public static Pudelko operator +(Pudelko p1, Pudelko p2)
+        {
+            double[] pudelko1 = { p1.A, p1.B, p1.C };
+            Array.Sort(pudelko1);
+            double[] pudelko2 = { p2.A, p2.B, p2.C };
+            Array.Sort(pudelko2);
+
+            Pudelko p3 = new Pudelko(pudelko1[0] + pudelko2[0], pudelko1[1] + pudelko2[1], pudelko1[2] + pudelko2[2]);
+
+            return p3;
+        }
     }	
 }
 

@@ -30,8 +30,10 @@ namespace Pudełko
             Console.WriteLine(p3);
             Console.WriteLine(p4);
             Console.WriteLine(p5);
+            Console.WriteLine(p4+p5);
+            
 
-
+            
 
 
 
