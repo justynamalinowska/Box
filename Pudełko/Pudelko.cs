@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Pudełko
 {
-    public class Pudelko : IFormattable
+    public class Pudelko : IFormattable, IEquatable<Pudelko>
     {
 
         public double a { get; set; }
@@ -9,34 +9,29 @@ namespace Pudełko
         public double c { get; set; }
         public UnitOfMeasure UnitOfMeasure { get; set; }
 
-        public Pudelko(double a = 0.01, double b = 0.01, double c = 0.01, UnitOfMeasure unitOfMeasure=UnitOfMeasure.meter)
+        public Pudelko(double a = 0.01, double b = 0.01, double c = 0.01, UnitOfMeasure unitOfMeasure = UnitOfMeasure.meter)
         {
-            UnitOfMeasure = unitOfMeasure;
-
-            if (unitOfMeasure==UnitOfMeasure.meter)
+            if (unitOfMeasure == UnitOfMeasure.centimeter)
             {
-                this.a = a;
-                this.b = b;
-                this.c = c;
+                a /= 100;
+                b /= 100;
+                c /= 100;
             }
-            else if (unitOfMeasure == UnitOfMeasure.centimeter)
+            else if (unitOfMeasure == UnitOfMeasure.milimeter)
             {
-                this.a /= 100;
-                this.b /= 100;
-                this.c /= 100;
-            }
-            else
-            {
-                this.a /= 1000;
-                this.b /= 1000;
-                this.c /= 1000;
+                a /= 1000;
+                b /= 1000;
+                c /= 1000;
             }
 
-            if (this.a <= 0 || this.b <= 0 || this.c <= 0 || this.a > 10 || this.b > 10 || this.c > 10)
+            if (a <= 0 || b <= 0 || c <= 0 || a > 10 || b > 10 || c > 10)
             {
                 throw new ArgumentOutOfRangeException();
             }
 
+            this.a = a;
+            this.b = b;
+            this.c = c;
         }
 
         public double A => Math.Round(a, 3);
@@ -74,6 +69,32 @@ namespace Pudełko
 
         public double Objetosc => Math.Round(a * b * c, 9);
         public double Pole => Math.Round((2 * a * b) + (2 * b * c) + (2 * c * a), 6);
+
+        public bool Equals(Pudelko other)
+        {
+            if (other is null)
+                return false;
+            if (Object.ReferenceEquals(this, other))
+                return true;
+
+            double[] p1 = { A, B, C };
+            Array.Sort(p1);
+            double[] p2 = { other.A, other.B, other.C };
+            Array.Sort(p2);
+
+            return (p1[0] == p2[0] && p1[1] == p2[1] && p1[2] == p2[2]);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is Pudelko)
+                return Equals((Pudelko)obj);
+            else
+                return false;
+        }
+
+        public override int GetHashCode() => (A, B, C).GetHashCode();
+
     }	
 }
 
