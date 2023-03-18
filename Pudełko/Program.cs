@@ -20,6 +20,21 @@ namespace Pudełko
             Console.WriteLine(p1.Objetosc);
             Console.WriteLine(p1.Pole);
 
+            Pudelko p2 = new Pudelko(1, 3.05, 2.1);
+            Pudelko p3 = new Pudelko(2.1, 1, 3.05);
+            Pudelko p4 = new Pudelko(2100, 1000, 3050, UnitOfMeasure.milimeter);
+            Pudelko p5 = new Pudelko(210, 100, 305, UnitOfMeasure.centimeter);
+
+            Console.WriteLine(p2.Equals(p5));
+            Console.WriteLine(p2.Equals(p4));
+            Console.WriteLine(p3);
+            Console.WriteLine(p4);
+            Console.WriteLine(p5);
+
+
+
+
+
             Console.ReadKey();
         }
     }
