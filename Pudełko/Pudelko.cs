@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Reflection;
+
 namespace Pudełko
 {
     public class Pudelko : IFormattable, IEquatable<Pudelko>
@@ -110,7 +112,24 @@ namespace Pudełko
         public static explicit operator double[](Pudelko pudelko) => new double[] { pudelko.A, pudelko.B, pudelko.C };
         public static implicit operator Pudelko((int a, int b, int c)krawedzie) => new Pudelko((double)krawedzie.a/1000, (double)krawedzie.b/1000, (double)krawedzie.c/1000);
 
+        private double[] array = new double[3];
+        public double this[int i]
+        { get
+            {
+                if (i < 0 || i >= array.Length)
+                    throw new IndexOutOfRangeException("Index out of range");
+                if (i == 0)
+                    return A;
+                else if (i == 1)
+                    return B;
+                else
+                    return C;
+            }
+        }
 
-    }
+        //public static override this[i]()
+        //{
+        //}
+}
 }
 

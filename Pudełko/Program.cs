@@ -36,8 +36,9 @@ namespace Pudełko
             Pudelko p6 = (2100, 1000, 3050);
             Console.WriteLine(p6);
             double[] tablica = (double[])p6;
-            Console.WriteLine(tablica[0] +" "+ tablica[1] +" "+ tablica[2]);
+            Console.WriteLine(tablica[0] + " " + tablica[1] + " " + tablica[2]);
 
+            Console.WriteLine(p6[0]);
 
 
             Console.ReadKey();
