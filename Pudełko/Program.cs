@@ -39,6 +39,10 @@ namespace Pudełko
             Console.WriteLine(tablica[0] + " " + tablica[1] + " " + tablica[2]);
 
             Console.WriteLine(p6[0]);
+            foreach (var x in p6)
+            {
+                Console.WriteLine(x);
+            }
 
 
             Console.ReadKey();

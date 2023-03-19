@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Reflection;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Pudełko
 {
-    public class Pudelko : IFormattable, IEquatable<Pudelko>
+    public class Pudelko : IFormattable, IEquatable<Pudelko>, IEnumerable<double>
     {
 
         public double a { get; set; }
@@ -127,9 +129,17 @@ namespace Pudełko
             }
         }
 
-        //public static override this[i]()
-        //{
-        //}
-}
+        public IEnumerator<double> GetEnumerator()
+        {
+            yield return A;
+            yield return B;
+            yield return C;
+        }
+
+        IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return array.GetEnumerator();
+        }
+    }
 }
 
