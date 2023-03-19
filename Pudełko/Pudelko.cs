@@ -106,6 +106,11 @@ namespace Pudełko
 
             return p3;
         }
-    }	
+
+        public static explicit operator double[](Pudelko pudelko) => new double[] { pudelko.A, pudelko.B, pudelko.C };
+        public static implicit operator Pudelko((int a, int b, int c)krawedzie) => new Pudelko((double)krawedzie.a/1000, (double)krawedzie.b/1000, (double)krawedzie.c/1000);
+
+
+    }
 }
 

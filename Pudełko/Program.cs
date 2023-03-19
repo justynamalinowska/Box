@@ -30,10 +30,13 @@ namespace Pudełko
             Console.WriteLine(p3);
             Console.WriteLine(p4);
             Console.WriteLine(p5);
-            Console.WriteLine(p4+p5);
-            
+            Console.WriteLine(p4 + p5);
+            Console.WriteLine(p4.Objetosc);
 
-            
+            Pudelko p6 = (2100, 1000, 3050);
+            Console.WriteLine(p6);
+            double[] tablica = (double[])p6;
+            Console.WriteLine(tablica[0] +" "+ tablica[1] +" "+ tablica[2]);
 
 
 
