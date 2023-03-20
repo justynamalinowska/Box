@@ -42,12 +42,7 @@ namespace Pudełko
         public double B => Math.Round(b, 3);
         public double C => Math.Round(c, 3);
 
-        public override string ToString()
-        {
-            return $"{A.ToString("F3")} m × {B.ToString("F3")} m × {C.ToString("F3")} m";
-        }
-
-        public string ToString(string? format, IFormatProvider? provider)
+        public string ToString(string? format, IFormatProvider? provider = default)
         {
             if (string.IsNullOrEmpty(format))
             {
@@ -57,7 +52,7 @@ namespace Pudełko
             switch (format.ToLower())
             {
                 case "m":
-                    return ToString();
+                        return $"{A.ToString("F3")} m × {B.ToString("F3")} m × {C.ToString("F3")} m";
 
                 case ("cm"):
                     return $"{A * 100:F1} {format} × {B * 100:F1} {format} × {C * 100:F1} {format}";
@@ -67,7 +62,6 @@ namespace Pudełko
 
                 default:
                     throw new FormatException();
-
             }
         }
 
