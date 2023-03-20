@@ -102,13 +102,22 @@ namespace Pudełko
         public static Pudelko operator +(Pudelko p1, Pudelko p2)
         {
             double[] pudelko1 = { p1.A, p1.B, p1.C };
-            Array.Sort(pudelko1);
             double[] pudelko2 = { p2.A, p2.B, p2.C };
+            Array.Sort(pudelko1);
             Array.Sort(pudelko2);
 
-            Pudelko p3 = new Pudelko(pudelko1[0] + pudelko2[0], pudelko1[1] + pudelko2[1], pudelko1[2] + pudelko2[2]);
+            double x, y, z;
+            x = pudelko1[0] + pudelko2[0];
+            if (pudelko1[1] > pudelko2[1])
+                y = pudelko1[1];
+            else
+                y = pudelko2[1];
+            if (pudelko1[2] > pudelko2[2])
+                z = pudelko1[2];
+            else
+                z = pudelko2[2];
 
-            return p3;
+            return new Pudelko(x, y, z);
         }
 
         public static explicit operator double[](Pudelko pudelko) => new double[] { pudelko.A, pudelko.B, pudelko.C };
