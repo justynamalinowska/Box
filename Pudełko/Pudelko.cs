@@ -47,7 +47,7 @@ namespace Pudełko
             return $"{A.ToString("F3")} m × {B.ToString("F3")} m × {C.ToString("F3")} m";
         }
 
-        public string ToString(string format)
+        public string ToString(string? format, IFormatProvider? provider)
         {
             if (string.IsNullOrEmpty(format))
             {
@@ -74,7 +74,7 @@ namespace Pudełko
         public double Objetosc => Math.Round(a * b * c, 9);
         public double Pole => Math.Round((2 * a * b) + (2 * b * c) + (2 * c * a), 6);
 
-        public bool Equals(Pudelko other)
+        public bool Equals(Pudelko? other)
         {
             if (other is null)
                 return false;
