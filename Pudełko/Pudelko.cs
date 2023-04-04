@@ -13,7 +13,7 @@ namespace Pudełko
         public double c { get; set; }
         public UnitOfMeasure UnitOfMeasure { get; set; }
 
-        public Pudelko(double a = 0.01, double b = 0.01, double c = 0.01, UnitOfMeasure unitOfMeasure = UnitOfMeasure.meter)
+        public Pudelko(double a, double b, double c, UnitOfMeasure unitOfMeasure = UnitOfMeasure.meter)
         {
             if (unitOfMeasure == UnitOfMeasure.centimeter)
             {
@@ -28,6 +28,10 @@ namespace Pudełko
                 c /= 1000;
             }
 
+            a = Math.Floor(a * 1000) / 1000;
+            b = Math.Floor(b * 1000) / 1000;
+            c = Math.Floor(c * 1000) / 1000;
+
             if (a <= 0 || b <= 0 || c <= 0 || a > 10 || b > 10 || c > 10)
             {
                 throw new ArgumentOutOfRangeException();
@@ -38,13 +42,69 @@ namespace Pudełko
             this.c = c;
         }
 
-        public double A => Math.Round(a, 3);
-        public double B => Math.Round(b, 3);
-        public double C => Math.Round(c, 3);
-
-        public string ToString(string? format, IFormatProvider? provider = default)
+        public Pudelko(double a, double b, UnitOfMeasure unitOfMeasure = UnitOfMeasure.meter)
         {
-            if (string.IsNullOrEmpty(format))
+            if (unitOfMeasure == UnitOfMeasure.centimeter)
+            {
+                a /= 100;
+                b /= 100;
+            }
+            else if (unitOfMeasure == UnitOfMeasure.milimeter)
+            {
+                a /= 1000;
+                b /= 1000;
+            }
+
+            a = Math.Floor(a * 1000) / 1000;
+            b = Math.Floor(b * 1000) / 1000;
+
+            if (a <= 0 || b <= 0 || a > 10 || b > 10)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            this.a = a;
+            this.b = b;
+            this.c = 0.1;
+        }
+
+        public Pudelko(double a, UnitOfMeasure unitOfMeasure = UnitOfMeasure.meter)
+        {
+            if (unitOfMeasure == UnitOfMeasure.centimeter)
+            {
+                a /= 100;
+            }
+            else if (unitOfMeasure == UnitOfMeasure.milimeter)
+            {
+                a /= 1000;
+            }
+
+            a = Math.Floor(a * 1000) / 1000;
+
+            if (a <= 0 || a > 10 )
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            this.a = a;
+            this.b = 0.1;
+            this.c = 0.1;
+        }
+
+        public Pudelko(UnitOfMeasure? unitOfMeasure = UnitOfMeasure.meter)
+        {
+            this.a = 0.1;
+            this.b = 0.1;
+            this.c = 0.1;
+        }
+
+        public double A => a; 
+        public double B => b; 
+        public double C => c; 
+
+        public string ToString(string? format = "m", IFormatProvider? provider = default)
+        {
+            if (format is null)
             {
                 format = "m";
             }
@@ -52,7 +112,7 @@ namespace Pudełko
             switch (format.ToLower())
             {
                 case "m":
-                        return $"{A.ToString("F3")} m × {B.ToString("F3")} m × {C.ToString("F3")} m";
+                        return $"{A.ToString("F3")} {format} × {B.ToString("F3")} {format} × {C.ToString("F3")} {format}";
 
                 case ("cm"):
                     return $"{A * 100:F1} {format} × {B * 100:F1} {format} × {C * 100:F1} {format}";

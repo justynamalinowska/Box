@@ -31,7 +31,7 @@ namespace Pudełko
             Console.WriteLine(p4);
             Console.WriteLine(p5);
             Console.WriteLine(p4 + p5);
-            Console.WriteLine(p4.Objetosc);
+            Console.WriteLine((p4+p5).Objetosc);
 
             Pudelko p6 = (2100, 1000, 3050);
             Console.WriteLine(p6);
@@ -43,6 +43,9 @@ namespace Pudełko
             {
                 Console.WriteLine(x);
             }
+
+            Pudelko p7 = new Pudelko(2.5, 9.321);
+            Console.WriteLine(p7.ToString());
 
 
             Console.ReadKey();
