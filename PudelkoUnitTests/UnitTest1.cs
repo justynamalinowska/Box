@@ -450,7 +450,7 @@ namespace PudelkoUnitTests
         [TestMethod]
         public void UnitTests_CountVolume()
         {
-            var p = new Pudelko(2.5, 4, 0.1);
+            Pudelko p = new Pudelko(2.5, 4, 0.1);
             double expectedVolume = 1;
 
             double actualVolume = p.Objetosc;
@@ -460,7 +460,7 @@ namespace PudelkoUnitTests
 
         public void UnitTests_CountArea()
         {
-            var p = new Pudelko(2.5, 4, 0.1);
+            Pudelko p = new Pudelko(2.5, 4, 0.1);
             double expectedArea = 21.3;
 
             double actualArea = p.Pole;
@@ -470,15 +470,43 @@ namespace PudelkoUnitTests
         #endregion
 
         #region Equals ===========================================
-        // ToDo
+        public void UnitTests_EqualsWithEqualBoxes()
+        {
+            Pudelko p1 = new Pudelko(2.5, 4, 0.1);
+            Pudelko p2 = new Pudelko(4, 2.5, 0.1);
+
+            bool areEqual = p1.Equals(p2);
+
+            Assert.IsTrue(areEqual);
+        }
+
+        public void UnitTests_EqualsWithDifferentBoxes()
+        {
+            Pudelko p1 = new Pudelko(2.5, 4, 0.1);
+            Pudelko p2 = new Pudelko(4, 2, 0.1);
+
+            bool areEqual = p1.Equals(p2);
+
+            Assert.IsFalse(areEqual);
+        }
         #endregion
 
         #region Operators overloading ===========================
-        // ToDo
-        #endregion
+        public void UnitTests_overloading_PlusSign()
+        {
+            Pudelko p1 = new Pudelko(1, 2, 3);
+            Pudelko p2 = new Pudelko(4, 5, 6);
 
-        #region Conversions =====================================
-        [TestMethod]
+            Pudelko expectedBox = new Pudelko(5, 5, 6);
+
+            Pudelko actualBox = p1 + p2;
+
+            Assert.AreEqual(expectedBox, actualBox);
+        }
+            #endregion
+
+            #region Conversions =====================================
+            [TestMethod]
         public void ExplicitConversion_ToDoubleArray_AsMeters()
         {
             var p = new Pudelko(1, 2.1, 3.231);
