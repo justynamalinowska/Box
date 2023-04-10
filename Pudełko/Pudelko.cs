@@ -2,15 +2,16 @@
 using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 
 namespace Pudełko
 {
-    public class Pudelko : IFormattable, IEquatable<Pudelko>, IEnumerable<double>
+    public sealed class Pudelko : IFormattable, IEquatable<Pudelko>, IEnumerable<double>
     {
 
-        public double a { get; set; }
-        public double b { get; set; }
-        public double c { get; set; }
+        public double a { get; private set; }
+        public double b { get; }
+        public readonly double c; //{ get; set; }
         public UnitOfMeasure UnitOfMeasure { get; set; }
 
         public Pudelko(double a, double b, double c, UnitOfMeasure unitOfMeasure = UnitOfMeasure.meter)
