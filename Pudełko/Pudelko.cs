@@ -9,10 +9,10 @@ namespace Pudełko
     public sealed class Pudelko : IFormattable, IEquatable<Pudelko>, IEnumerable<double>
     {
 
-        public double a { get; private set; }
-        public double b { get; }
-        public readonly double c; //{ get; set; }
-        public UnitOfMeasure UnitOfMeasure { get; set; }
+        public readonly double a;
+        public readonly double b;
+        public readonly double c;
+        public static UnitOfMeasure unitOfMeasure { get; private set; }
 
         public Pudelko(double a, double b, double c, UnitOfMeasure unitOfMeasure = UnitOfMeasure.meter)
         {
@@ -113,7 +113,7 @@ namespace Pudełko
             switch (format.ToLower())
             {
                 case "m":
-                        return $"{A.ToString("F3")} {format} × {B.ToString("F3")} {format} × {C.ToString("F3")} {format}";
+                    return $"{A.ToString("F3")} {format} × {B.ToString("F3")} {format} × {C.ToString("F3")} {format}";
 
                 case ("cm"):
                     return $"{A * 100:F1} {format} × {B * 100:F1} {format} × {C * 100:F1} {format}";
@@ -128,6 +128,7 @@ namespace Pudełko
 
         public double Objetosc => Math.Round(a * b * c, 9);
         public double Pole => Math.Round((2 * a * b) + (2 * b * c) + (2 * c * a), 6);
+
 
         public bool Equals(Pudelko? other)
         {
@@ -203,6 +204,35 @@ namespace Pudełko
         IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return array.GetEnumerator();
+        }
+
+        public static Pudelko Parse(string pudelkoString)
+        {
+            string[] parts = pudelkoString.Split('×');
+            double[] lengths = new double[3];
+            string unit = "m";
+            for (int i = 0; i < parts.Length; ++i)
+            {
+                string[] length = parts[i].Split(' ');
+                lengths[i] = Double.Parse(length[0]);
+                unit = length[1];
+            }
+            switch (unit)
+            {
+                case "m":
+                    unitOfMeasure = UnitOfMeasure.meter;
+                    break;
+                case "cm":
+                    unitOfMeasure = UnitOfMeasure.centimeter;
+                    break;
+                case "mm":
+                    unitOfMeasure = UnitOfMeasure.milimeter;
+                    break;
+
+                default: throw new Exception("Wrong format of the measure!");
+            }
+
+            return new Pudelko(lengths[0], lengths[1], lengths[2], unitOfMeasure);
         }
     }
 }
