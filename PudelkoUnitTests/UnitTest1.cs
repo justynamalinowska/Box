@@ -447,8 +447,26 @@ namespace PudelkoUnitTests
 
 
         #region Pole, Objętość ===================================
-        // ToDo
+        [TestMethod]
+        public void UnitTests_CountVolume()
+        {
+            var p = new Pudelko(2.5, 4, 0.1);
+            double expectedVolume = 1;
 
+            double actualVolume = p.Objetosc;
+
+            Assert.AreEqual(expectedVolume, actualVolume);
+        }
+
+        public void UnitTests_CountArea()
+        {
+            var p = new Pudelko(2.5, 4, 0.1);
+            double expectedArea = 21.3;
+
+            double actualArea = p.Pole;
+
+            Assert.AreEqual(expectedArea, actualArea);
+        }
         #endregion
 
         #region Equals ===========================================
