@@ -107,9 +107,7 @@ namespace Pudełko
         public string ToString(string? format = "m", IFormatProvider? provider = default)
         {
             if (format is null)
-            {
                 format = "m";
-            }
 
             switch (format.ToLower())
             {
@@ -155,6 +153,16 @@ namespace Pudełko
         }
 
         public override int GetHashCode() => (A, B, C).GetHashCode();
+
+        public static bool operator ==(Pudelko m1, Pudelko m2)
+        {
+            return m1.Equals(m2);
+        }
+
+        public static bool operator !=(Pudelko m1, Pudelko m2)
+        {
+            return !m1.Equals(m2);
+        }
 
         public static Pudelko operator +(Pudelko p1, Pudelko p2)
         {
@@ -209,32 +217,51 @@ namespace Pudełko
 
         public static Pudelko Parse(string pudelkoString)
         {
-            string[] parts = pudelkoString.Split('×');
-            double[] lengths = new double[3];
-            string unit = "m";
-            for (int i = 0; i < parts.Length; ++i)
+            var lengths = pudelkoString.Split(' ');
+
+            UnitOfMeasure unit;
+
+            switch (lengths[1])
             {
-                string[] length = parts[i].Split(' ');
-                lengths[i] = Double.Parse(length[0]);
-                unit = length[1];
-            }
-            switch (unit)
-            {
-                case "m":
-                    unitOfMeasure = UnitOfMeasure.meter;
-                    break;
                 case "cm":
-                    unitOfMeasure = UnitOfMeasure.centimeter;
+                    unit = UnitOfMeasure.centimeter;
                     break;
                 case "mm":
-                    unitOfMeasure = UnitOfMeasure.milimeter;
+                    unit = UnitOfMeasure.milimeter;
                     break;
-
-                default: throw new Exception("Wrong format of the measure!");
+                default:
+                    unit = UnitOfMeasure.meter;
+                    break;
             }
-
-            return new Pudelko(lengths[0], lengths[1], lengths[2], unitOfMeasure);
+            return new Pudelko(double.Parse(lengths[0]), double.Parse(lengths[3]), double.Parse(lengths[3]), unit);
         }
+
+        //private static int SortByCriteria(Pudelko p1, Pudelko p2)
+        //{
+        //    if (p1.Objetosc < p2.Objetosc)
+        //        return -1;
+        //    else if (p1.Objetosc > p2.Objetosc)
+        //        return 1;
+        //    else
+        //    {
+        //        if (p1.Pole < p2.Pole)
+        //            return -1;
+        //        else if (p1.Pole > p2.Pole)
+        //            return 1;
+        //        else
+        //        {
+        //            double edges1 = p1.A + p1.B + p1.C;
+        //            double edges2 = p2.A + p2.B + p2.C;
+
+        //            if (edges1 < edges2)
+        //                return -1;
+        //            else if (edges1 > edges2)
+        //                return 1;
+        //            else
+        //                return 0;
+        //        }
+        //    }
+        //}
     }
 }
 
