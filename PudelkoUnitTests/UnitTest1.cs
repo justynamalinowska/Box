@@ -447,25 +447,27 @@ namespace PudelkoUnitTests
 
 
         #region Pole, Objętość ===================================
-        [TestMethod]
-        public void UnitTests_CountVolume()
+        [DataTestMethod, TestMethod("Volume")]
+        [DataRow(2.5, 4, 0.1, 1)]
+        [DataRow(2, 1, 2, 4)]
+        [DataRow(5.11, 3.5, 9.80, 175.273)]
+
+        public void UnitTests_CountVolume(double a, double b, double c, double expectedVolume)
         {
-            Pudelko p = new Pudelko(2.5, 4, 0.1);
-            double expectedVolume = 1;
+            Pudelko p = new Pudelko(a, b, c);
 
-            double actualVolume = p.Objetosc;
-
-            Assert.AreEqual(expectedVolume, actualVolume);
+            Assert.AreEqual(expectedVolume, p.Objetosc);
         }
 
-        public void UnitTests_CountArea()
+        [DataTestMethod, TestMethod("Area")]
+        [DataRow(2.5, 4, 0.1, 21.3)]
+        [DataRow(2, 1, 2, 16)]
+        [DataRow(5.11, 3.5, 9.80, 204.526)]
+        public void UnitTests_CountArea(double a, double b, double c, double expectedArea)
         {
-            Pudelko p = new Pudelko(2.5, 4, 0.1);
-            double expectedArea = 21.3;
+            Pudelko p = new Pudelko(a, b, c);
 
-            double actualArea = p.Pole;
-
-            Assert.AreEqual(expectedArea, actualArea);
+            Assert.AreEqual(expectedArea, p.Pole);
         }
         #endregion
 
@@ -475,10 +477,9 @@ namespace PudelkoUnitTests
             Pudelko p1 = new Pudelko(2.5, 4, 0.1);
             Pudelko p2 = new Pudelko(4, 2.5, 0.1);
 
-            bool areEqual = p1.Equals(p2);
-
-            Assert.IsTrue(areEqual);
+            Assert.AreEqual(p1, p2);
         }
+
 
         public void UnitTests_EqualsWithDifferentBoxes()
         {
