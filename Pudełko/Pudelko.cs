@@ -235,33 +235,6 @@ namespace Pudełko
             }
             return new Pudelko(double.Parse(lengths[0]), double.Parse(lengths[3]), double.Parse(lengths[3]), unit);
         }
-
-        //private static int SortByCriteria(Pudelko p1, Pudelko p2)
-        //{
-        //    if (p1.Objetosc < p2.Objetosc)
-        //        return -1;
-        //    else if (p1.Objetosc > p2.Objetosc)
-        //        return 1;
-        //    else
-        //    {
-        //        if (p1.Pole < p2.Pole)
-        //            return -1;
-        //        else if (p1.Pole > p2.Pole)
-        //            return 1;
-        //        else
-        //        {
-        //            double edges1 = p1.A + p1.B + p1.C;
-        //            double edges2 = p2.A + p2.B + p2.C;
-
-        //            if (edges1 < edges2)
-        //                return -1;
-        //            else if (edges1 > edges2)
-        //                return 1;
-        //            else
-        //                return 0;
-        //        }
-        //    }
-        //}
     }
 }
 
