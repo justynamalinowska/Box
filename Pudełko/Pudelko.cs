@@ -61,9 +61,8 @@ namespace Pudełko
             b = Math.Floor(b * 1000) / 1000;
 
             if (a <= 0 || b <= 0 || a > 10 || b > 10)
-            {
                 throw new ArgumentOutOfRangeException();
-            }
+
 
             this.a = a;
             this.b = b;
@@ -154,15 +153,9 @@ namespace Pudełko
 
         public override int GetHashCode() => (A, B, C).GetHashCode();
 
-        public static bool operator ==(Pudelko m1, Pudelko m2)
-        {
-            return m1.Equals(m2);
-        }
+        public static bool operator ==(Pudelko m1, Pudelko m2) => m1.Equals(m2);
 
-        public static bool operator !=(Pudelko m1, Pudelko m2)
-        {
-            return !m1.Equals(m2);
-        }
+        public static bool operator !=(Pudelko m1, Pudelko m2) => !m1.Equals(m2);
 
         public static Pudelko operator +(Pudelko p1, Pudelko p2)
         {
@@ -210,10 +203,7 @@ namespace Pudełko
             yield return C;
         }
 
-        IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return array.GetEnumerator();
-        }
+        IEnumerator System.Collections.IEnumerable.GetEnumerator() => array.GetEnumerator();
 
         public static Pudelko Parse(string pudelkoString)
         {
