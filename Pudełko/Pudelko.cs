@@ -223,7 +223,7 @@ namespace Pudełko
                     unit = UnitOfMeasure.meter;
                     break;
             }
-            return new Pudelko(double.Parse(lengths[0]), double.Parse(lengths[3]), double.Parse(lengths[3]), unit);
+            return new Pudelko(double.Parse(lengths[0]), double.Parse(lengths[3]), double.Parse(lengths[6]), unit);
         }
     }
 }
